@@ -19,6 +19,6 @@ class Dice {
     }
 
     getImagePath() {
-        return `dice-images/${this.color}/${this.color}-dice-${this.value}.png`;
+        return `dice-images/${this.#color}/${this.#color}-dice-${this.#value}.png`;
     }
 }

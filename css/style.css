@@ -139,6 +139,12 @@ footer {
     justify-content: center;
 }
 
+.dice-images {
+    width: 100%;
+    max-width: 250px;
+    margin: 0px auto;
+}
+
 button {
     padding: 10px 20px;
     border: none;
