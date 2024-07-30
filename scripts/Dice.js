@@ -21,4 +21,8 @@ class Dice {
     getImagePath() {
         return `dice-images/${this.#color}/${this.#color}-dice-${this.#value}.png`;
     }
+
+    getImageAlt() {
+        return `${this.#color}-dice-${this.#value}`;
+    }
 }

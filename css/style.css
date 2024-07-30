@@ -145,6 +145,14 @@ footer {
     margin: 0px auto;
 }
 
+.game-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 button {
     padding: 10px 20px;
     border: none;

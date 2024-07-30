@@ -22,17 +22,25 @@
         <div id="game-window">
             <div id="dice-container">
                 <div id="player-dice">
-                    <img class="dice-images" src="dice-images/blue/blue-dice-1.jpg" alt="blue-dice-1">
-                    <img class="dice-images" src="dice-images/blue/blue-dice-6.jpg" alt="blue-dice-6">
+                    <img id="player-die1" class="dice-images" src="dice-images/blue/blue-dice-1.jpg" alt="blue-dice-1">
+                    <img id="player-die2" class="dice-images" src="dice-images/blue/blue-dice-6.jpg" alt="blue-dice-6">
+                    <div class="game-scores">
+                        <p>Round Score: <span id="player-round-score">0</span></p>
+                        <p>Total Score: <span id="player-total-score">0</span></p>
+                    </div>
                 </div>
                 <div id="computer-dice">
-                    <img class="dice-images" src="dice-images/red/red-dice-1.jpg" alt="red-dice-1">
-                    <img class="dice-images" src="dice-images/red/red-dice-6.jpg" alt="red-dice-6">
+                    <img id="computer-die1" class="dice-images" src="dice-images/red/red-dice-1.jpg" alt="red-dice-1">
+                    <img id="computer-die2" class="dice-images" src="dice-images/red/red-dice-6.jpg" alt="red-dice-6">
+                    <div class="game-scores">
+                        <p>Round Score: <span id="computer-round-score">0</span></p>
+                        <p>Total Score: <span id="computer-total-score">0</span></p>
+                    </div>
                 </div>
             </div>
             <div class="buttons">
-                <button id="roll-dice "class="buttons" type="button"><strong>Roll Dice</strong></button>
-                <button id="new-game "class="buttons" type="button"><strong>New Game</strong></button>
+                <button id="roll-dice-button "class="buttons" type="button"><strong>Roll Dice</strong></button>
+                <button id="new-game-button "class="buttons" type="button"><strong>New Game</strong></button>
             </div>
         </div>
     </main>
