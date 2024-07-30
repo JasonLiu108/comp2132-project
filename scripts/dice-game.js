@@ -7,29 +7,26 @@ const resultMessage      = document.getElementById('result-message');
 const rollDiceButton     = document.getElementById('roll-dice-button');
 const newGameButton      = document.getElementById('new-game-button');
 
-// Dice elements
+// Dice image DOM elements
 const playerDie1Img   = document.getElementById('player-die1');
 const playerDie2Img   = document.getElementById('player-die2');
 const computerDie1Img = document.getElementById('computer-die1');
 const computerDie2Img = document.getElementById('computer-die2');
 
-// Constants
-const minDiceValue    = 1;
-const scoreMultiplier = 2;
-const maxRounds       = 3;
-
-// Initialize Dice objects with specific initial values
+// Initialize dice objects with default values
 const playerDie1   = new Dice('blue', 1);
 const playerDie2   = new Dice('blue', 6);
 const computerDie1 = new Dice('red', 1);
 const computerDie2 = new Dice('red', 6);
 
-// Score and round variables
-let playerScore   = 0;
-let computerScore = 0;
-let round         = 0;
+// Game variables and constants
+let playerScore       = 0;
+let computerScore     = 0;
+let round             = 0;
+const scoreMultiplier = 2;
+const maxRounds       = 3;
 
-
+// Function to calculate the score for a given pair of dice
 function calculateScore(die1, die2) {
     if (die1 === minDiceValue || die2 === minDiceValue) {
         return 0;
@@ -40,6 +37,7 @@ function calculateScore(die1, die2) {
     }
 }
 
+// Function to check if the game is over and display the winner
 function checkWinner() {
     if (round === maxRounds) {
         if (playerScore > computerScore) {
@@ -49,48 +47,71 @@ function checkWinner() {
         } else {
             resultMessage.textContent = 'It\'s a Tie!';
         }
-        rollButton.disabled = true;
+        rollDiceButton.disabled = true;
     }
 }
 
+// Function to update the UI with the current dice images and scores
 function updateUI() {
-    const playerDie1Value = playerDie1.value;
-    const playerDie2Value = playerDie2.value;
+    // Get the current dice values
+    const playerDie1Value   = playerDie1.value;
+    const playerDie2Value   = playerDie2.value;
     const computerDie1Value = computerDie1.value;
     const computerDie2Value = computerDie2.value;
 
-    // Update dice images with color
+    // Update the player dice images
     playerDie1Img.src = playerDie1.getImagePath();
     playerDie1Img.alt = playerDie1.getImageAlt();
     playerDie2Img.src = playerDie2.getImagePath();
     playerDie2Img.alt = playerDie2.getImageAlt();
 
+    // Update the computer dice images
     computerDie1Img.src = computerDie1.getImagePath();
     computerDie1Img.alt = computerDie1.getImageAlt();
     computerDie2Img.src = computerDie2.getImagePath();
     computerDie2Img.alt = computerDie2.getImageAlt();
 
-     // Update scores
-    playerRoundScore.textContent = calculateScore(playerDie1Value, playerDie2Value);
-    playerTotalScore.textContent = playerScore;
+    //Update the player and computer scores
+    playerRoundScore.textContent   = calculateScore(playerDie1Value, playerDie2Value);
+    playerTotalScore.textContent   = playerScore;
     computerRoundScore.textContent = calculateScore(computerDie1Value, computerDie2Value);
     computerTotalScore.textContent = computerScore;
 }
 
+// Event listener for the rolling the dice
 rollDiceButton.addEventListener('click', () => {
+    // Roll the dice
     playerDie1.roll();
     playerDie2.roll();
     computerDie1.roll();
     computerDie2.roll();
 
+    // Calculate the round scores
     const playerRoundScoreValue   = calculateScore(playerDie1.value, playerDie2.value);
     const computerRoundScoreValue = calculateScore(computerDie1.value, computerDie2.value);
 
-    playerScore += playerRoundScoreValue;
+    // Update the player and computer scores
+    playerScore   += playerRoundScoreValue;
     computerScore += computerRoundScoreValue;
 
     round++;
 
     updateUI();
     checkWinner();
+});
+
+// Event listener for starting a new game
+newGameButton.addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+    resultMessage.textContent = '';
+    rollDiceButton.disabled = false;
+
+    playerDie1.value = 1;
+    playerDie2.value = 6;
+    computerDie1.value = 1;
+    computerDie2.value = 6;
+
+    updateUI();
 });

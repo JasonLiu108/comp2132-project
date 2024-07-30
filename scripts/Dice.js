@@ -1,16 +1,16 @@
-const imagePath      = "dice-images/";
+const diceImageDirectory = "dice-images/";
 const imageExtension = ".jpg";
 
 const minDiceValue = 1;
 const maxDiceValue = 6;
 
 class Dice {
-    #value;
-    #color;
+    color;
+    value;
 
-    constructor(value, color) {
-        this.#value = value;
-        this.#color = color;
+    constructor(color, value) {
+        this.color = color;
+        this.value = value;
     }
 
     roll() {
@@ -19,10 +19,10 @@ class Dice {
     }
 
     getImagePath() {
-        return `dice-images/${this.#color}/${this.#color}-dice-${this.#value}.png`;
+        return `${diceImageDirectory}${this.color}/${this.color}-dice-${this.value}${imageExtension}`;
     }
 
     getImageAlt() {
-        return `${this.#color}-dice-${this.#value}`;
+        return `${this.color}-dice-${this.value}`;
     }
 }
