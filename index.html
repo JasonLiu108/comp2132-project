@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMP2132 Assignment 08</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <script src="scripts/assignment-08.js" defer="defer"></script>
+</head>
+
+<body>
+    <header>
+        <h1>COMP 2132 Assignment 08</h1>
+    </header>
+    <main>
+        <h1>Bike Product: LTD Race</h1>
+        <div class="product-container">
+            <div class="product-images">
+                <img id="main-image" src="product-images/bike-1.jpg" alt="bike-1.jpg">
+                <div class="buttons">
+                    <button id="start-animation" class="button">Start</button>
+                    <button id="stop-animation" class="button">Stop</button>
+                    <button id="reverse-animation" class="button">Reverse</button>
+                </div>
+            </div>
+        </div>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span id="close-popup" class="close-button">&times;</span>
+                <h3>Hello, User</h3>
+                <p>Instructions:</p>
+                <p>To rotate the view of the bike, click on the 'Start' animation button. Stop the animation by clicking the 'Stop' button. To reverse the rotation of the view of the bike, click the 'Reverse' button.</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Jason Liu COMP 2132. All rights reserved.</p>
+    </footer>
+</body>
+</html>
