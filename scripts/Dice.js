@@ -1,4 +1,4 @@
-const diceImageDirectory = "dice-images/";
+const diceImageDirectory = "images/dice-images/";
 const imageExtension     = ".jpg";
 
 const minDiceValue = 1;

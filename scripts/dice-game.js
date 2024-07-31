@@ -45,6 +45,7 @@ function calculateScore(die1, die2) {
 
 // Function to check if the game is over and display the winner
 function checkWinner() {
+    console.log('checkWinner called');
     if (round === maxRounds) {
         if (playerScore > computerScore) {
             resultMessagePopup.textContent = 'Player Wins!';
@@ -87,7 +88,8 @@ function updateUI() {
 
 // Event listener for the rolling the dice
 rollDiceButton.addEventListener('click', () => {
-    let currentAnimFrame    = 1; // Reset currentAnimFrame to 1 at the start of each roll
+    let currentAnimFrame = 1; // Reset currentAnimFrame to 1 at the start of each roll
+    rollDiceButton.disabled = true; // Disable the button at the start of the animation
 
     // Dice animation
     const animationInterval = setInterval(function() {
@@ -115,7 +117,12 @@ rollDiceButton.addEventListener('click', () => {
             round++;
 
             updateUI();
-            checkWinner();
+            rollDiceButton.disabled = false; // Re-enable the button after the animation completes
+            
+            // Call checkWinner only if the maximum number of rounds is reached
+            if (round >= maxRounds) {
+                checkWinner();
+            }
         }
     }, diceAnimInterval);
 });
