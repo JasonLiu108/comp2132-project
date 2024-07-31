@@ -118,7 +118,7 @@ rollDiceButton.addEventListener('click', () => {
 
             updateUI();
             rollDiceButton.disabled = false; // Re-enable the button after the animation completes
-            
+
             // Call checkWinner only if the maximum number of rounds is reached
             if (round >= maxRounds) {
                 checkWinner();
@@ -153,5 +153,37 @@ closePopup.addEventListener('click', () => {
 window.addEventListener('click', (event) => {
     if (event.target === resultPopup) {
         resultPopup.style.display = 'none';
+    }
+});
+
+// New popup DOM elements
+const infoPopup = document.createElement('div');
+infoPopup.id = 'info-popup';
+infoPopup.innerHTML = `
+    <div class="info-popup-content">
+        <h2>Game Rules</h2>
+        <p>1. Roll the dice and try to get the highest score.</p>
+        <p>2. Each round, both player and computer roll two dice.</p>
+        <p>3. If any of the two dice comes up as a 1 then the score for that round is 0. eg: if the player rolls a 6 and 1, they get a score of 0.</p>
+        <p>4. If both dice are the same, the score is doubled. eg: if the player rolls a 3 and 3, they get a score of 12.</p>
+        <p>5. If the roll is any other combination of dice other than the ones mention above, the score is the total value of the two dice.
+        eg: player rolls a 3 and 2, player gets a score of 3+2=5.</p>
+        <p>6. The total score is calculated based on the dice values.</p>
+        <p>7. The player with the highest score at the end of three rounds wins.</p>
+        <p>8. A tie is possible, in which case the game is declared a draw.</p>
+        <button id="close-info-popup" class="close-button">Close</button>
+    </div>
+`;
+document.body.appendChild(infoPopup);
+
+// Event listener for closing the info popup
+document.getElementById('close-info-popup').addEventListener('click', () => {
+    infoPopup.style.display = 'none';
+});
+
+// Close the info popup when clicking outside of it
+window.addEventListener('click', (event) => {
+    if (event.target === infoPopup) {
+        infoPopup.style.display = 'none';
     }
 });
