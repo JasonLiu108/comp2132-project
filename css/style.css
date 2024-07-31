@@ -103,6 +103,10 @@ footer {
     padding: 1rem;
 }
 
+#game-window {
+    padding-top: 100px;
+}
+
 /* Dice container styling*/
 #player-dice, #computer-dice {
     display: flex;

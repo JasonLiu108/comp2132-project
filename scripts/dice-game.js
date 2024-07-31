@@ -139,7 +139,7 @@ newGameButton.addEventListener('click', () => {
     round         = 0;
 
     resultMessagePopup.textContent = ''; // Clear result message
-    rollDiceButton.disabled   = false;
+    rollDiceButton.disabled        = false;
 
     playerDie1.value   = minDiceValue;
     playerDie2.value   = maxDiceValue;
@@ -149,12 +149,12 @@ newGameButton.addEventListener('click', () => {
     updateUI();
 });
 
-// Event listener for closing the modal
+// Event listener for closing the popup
 closePopup.addEventListener('click', () => {
     resultPopup.style.display = 'none';
 });
 
-// Close the modal when clicking outside of it
+// Close the popup when clicking outside of it
 window.addEventListener('click', (event) => {
     if (event.target === resultPopup) {
         resultPopup.style.display = 'none';
