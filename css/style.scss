@@ -1,3 +1,38 @@
+// styles.scss
+
+// Variables
+$background-color: #f6f1bc;
+$header-background: #4CAF50;
+$header-color: white;
+$text-color: #333;
+$button-background: #4CAF50;
+$button-hover-background: #45a049;
+$border-color: black;
+$box-shadow-color: black;
+$border-radius: 8px;
+
+// Mixin for box styles
+@mixin box-style($padding, $border, $box-shadow, $border-radius) {
+    padding: $padding;
+    border: $border;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    box-sizing: border-box;
+}
+
+// Mixin for responsive typography
+@mixin responsive-text($font-size-small, $font-size-medium, $font-size-large) {
+    font-size: $font-size-large;
+
+    @media (max-width: 900px) {
+        font-size: $font-size-medium;
+    }
+
+    @media (max-width: 600px) {
+        font-size: $font-size-small;
+    }
+}
+
 html, body {
     overflow-x: hidden;
 }
@@ -9,12 +44,12 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f6f1bc;
+    background-color: $background-color;
 }
 
 header {
-    background-color: #4CAF50;
-    color: white;
+    background-color: $header-background;
+    color: $header-color;
     padding: 1rem;
     text-align: center;
 }
@@ -31,64 +66,21 @@ section {
     margin-bottom: 2rem;
     width: 100%;
     max-width: 1000px;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    box-shadow: 0px 2px 5px black;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-h1, h2 {
-    color: #333;
+    @include box-style(1rem, 1px solid #ccc, 0px 2px 5px $box-shadow-color, $border-radius);
 }
 
 h1 {
-    font-size: 28px;
-}
-
-/* Responsive styles */
-@media (max-width: 900px) {
-    h1 {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 600px) {
-    h1 {
-        font-size: 20px;
-    }
+    @include responsive-text(20px, 24px, 28px);
+    color: $text-color;
 }
 
 h2 {
-    font-size: 26px;
-}
-
-@media (max-width: 900px) {
-    h2 {
-        font-size: 22px;
-    }
-}
-
-@media (max-width: 600px) {
-    h2 {
-        font-size: 18px;
-    }
+    @include responsive-text(18px, 22px, 26px);
+    color: $text-color;
 }
 
 h3 {
-    font-size: 24px;
-}
-
-@media (max-width: 900px) {
-    h3 {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 600px) {
-    h3 {
-        font-size: 16px;
-    }
+    @include responsive-text(16px, 20px, 24px);
 }
 
 ul {
@@ -97,23 +89,18 @@ ul {
 }
 
 footer {
-    background-color: #4CAF50;
-    color: white;
+    background-color: $header-background;
+    color: $header-color;
     text-align: center;
     padding: 1rem;
 }
 
-/* Dice container styling*/
 #player-dice, #computer-dice {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    padding: 0;
-    border: 5px solid black;
-    box-shadow: 0px 2px 5px black;
-    border-radius: 8px;
-    box-sizing: border-box;
+    @include box-style(0, 5px solid $border-color, 0px 2px 5px $box-shadow-color, $border-radius);
 }
 
 #dice-container {
@@ -129,7 +116,6 @@ footer {
     max-width: 250px;
 }
 
-/* Score box styling */
 .player-score, .computer-score {
     display: flex;
     flex-direction: column;
@@ -137,11 +123,7 @@ footer {
     align-items: center;
     width: 100%;
     max-width: 500px;
-    padding: 10px;
-    border: 5px solid black;
-    box-shadow: 0px 2px 5px black;
-    border-radius: 8px;
-    box-sizing: border-box;
+    @include box-style(10px, 5px solid $border-color, 0px 2px 5px $box-shadow-color, $border-radius);
 }
 
 #score-container {
@@ -152,12 +134,11 @@ footer {
     max-width: 1000px;
 }
 
-/* Button styling */
 button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50;
+    background-color: $button-background;
     color: white;
     cursor: pointer;
 }
@@ -172,10 +153,9 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: $button-hover-background;
 }
 
-/* Popup styles */
 .popup {
     display: none; /* Ensure the popup is hidden initially */
     position: fixed;
@@ -202,7 +182,7 @@ button:hover {
 }
 
 .close-button {
-    background-color: #4CAF50;
+    background-color: $button-background;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -213,7 +193,7 @@ button:hover {
 }
 
 .close-button:hover {
-    background-color: #45a049;
+    background-color: $button-hover-background;
 }
 
 #info-popup {
