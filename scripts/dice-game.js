@@ -48,7 +48,6 @@ function calculateScore(die1, die2) {
 
 // Function to check if the game is over and display the winner
 function checkWinner() {
-    console.log('checkWinner called');
     if (round === maxRounds) {
         if (playerScore > computerScore) {
             resultMessagePopup.textContent = 'Player Wins!';
