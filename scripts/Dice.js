@@ -1,5 +1,5 @@
 const diceImageDirectory = "dice-images/";
-const imageExtension = ".jpg";
+const imageExtension     = ".jpg";
 
 const minDiceValue = 1;
 const maxDiceValue = 6;
@@ -24,5 +24,9 @@ class Dice {
 
     getImageAlt() {
         return `${this.color}-dice-${this.value}`;
+    }
+
+    getFrameImagePath(frameNumber) {
+        return `${diceImageDirectory}${this.color}/${this.color}-frame-${frameNumber}${imageExtension}`;
     }
 }

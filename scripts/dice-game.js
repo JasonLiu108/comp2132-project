@@ -20,11 +20,13 @@ const computerDie1 = new Dice('red', 1);
 const computerDie2 = new Dice('red', 6);
 
 // Game variables and constants
-let playerScore       = 0;
-let computerScore     = 0;
-let round             = 0;
-const scoreMultiplier = 2;
-const maxRounds       = 3;
+let playerScore         = 0;
+let computerScore       = 0;
+let round               = 0;
+const scoreMultiplier   = 2;
+const maxRounds         = 3;
+const diceAnimInterval  = 150;
+const numDiceAnimFrames = 5;
 
 // Function to calculate the score for a given pair of dice
 function calculateScore(die1, die2) {
@@ -80,38 +82,52 @@ function updateUI() {
 
 // Event listener for the rolling the dice
 rollDiceButton.addEventListener('click', () => {
-    // Roll the dice
-    playerDie1.roll();
-    playerDie2.roll();
-    computerDie1.roll();
-    computerDie2.roll();
+    let currentAnimFrame    = 1; // Reset currentAnimFrame to 1 at the start of each roll
 
-    // Calculate the round scores
-    const playerRoundScoreValue   = calculateScore(playerDie1.value, playerDie2.value);
-    const computerRoundScoreValue = calculateScore(computerDie1.value, computerDie2.value);
+    // Dice animation
+    const animationInterval = setInterval(function() {
+        playerDie1Img.src   = playerDie1.getFrameImagePath(currentAnimFrame);
+        playerDie2Img.src   = playerDie2.getFrameImagePath(currentAnimFrame);
+        computerDie1Img.src = computerDie1.getFrameImagePath(currentAnimFrame);
+        computerDie2Img.src = computerDie2.getFrameImagePath(currentAnimFrame);
 
-    // Update the player and computer scores
-    playerScore   += playerRoundScoreValue;
-    computerScore += computerRoundScoreValue;
+        currentAnimFrame++;
+        if (currentAnimFrame > numDiceAnimFrames) {
+            clearInterval(animationInterval);
 
-    round++;
+            // Actual dice roll and score update
+            playerDie1.roll();
+            playerDie2.roll();
+            computerDie1.roll();
+            computerDie2.roll();
 
-    updateUI();
-    checkWinner();
+            const playerRoundScoreValue   = calculateScore(playerDie1.value, playerDie2.value);
+            const computerRoundScoreValue = calculateScore(computerDie1.value, computerDie2.value);
+
+            playerScore   += playerRoundScoreValue;
+            computerScore += computerRoundScoreValue;
+
+            round++;
+
+            updateUI();
+            checkWinner();
+        }
+    }, diceAnimInterval);
 });
 
 // Event listener for starting a new game
 newGameButton.addEventListener('click', () => {
-    playerScore = 0;
+    playerScore   = 0;
     computerScore = 0;
-    round = 0;
-    resultMessage.textContent = '';
-    rollDiceButton.disabled = false;
+    round         = 0;
 
-    playerDie1.value = 1;
-    playerDie2.value = 6;
-    computerDie1.value = 1;
-    computerDie2.value = 6;
+    resultMessage.textContent = '';
+    rollDiceButton.disabled   = false;
+
+    playerDie1.value   = minDiceValue;
+    playerDie2.value   = maxDiceValue;
+    computerDie1.value = minDiceValue;
+    computerDie2.value = maxDiceValue;
 
     updateUI();
 });
