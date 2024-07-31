@@ -32,6 +32,9 @@ const maxRounds         = 3;
 const diceAnimInterval  = 150;
 const numDiceAnimFrames = 5;
 
+// Dice audio element 
+const diceSound = new Audio('sound/dice-shake.mp3');
+
 // Function to calculate the score for a given pair of dice
 function calculateScore(die1, die2) {
     if (die1 === minDiceValue || die2 === minDiceValue) {
@@ -90,6 +93,9 @@ function updateUI() {
 rollDiceButton.addEventListener('click', () => {
     let currentAnimFrame = 1; // Reset currentAnimFrame to 1 at the start of each roll
     rollDiceButton.disabled = true; // Disable the button at the start of the animation
+
+    // Play the dice shaking sound
+    diceSound.play();
 
     // Dice animation
     const animationInterval = setInterval(function() {
@@ -175,6 +181,12 @@ infoPopup.innerHTML = `
     </div>
 `;
 document.body.appendChild(infoPopup);
+
+// Event listener for showing the info popup
+const gameRulesButton = document.getElementById('game-rules-button');
+gameRulesButton.addEventListener('click', () => {
+    infoPopup.style.display = 'flex';
+});
 
 // Event listener for closing the info popup
 document.getElementById('close-info-popup').addEventListener('click', () => {
