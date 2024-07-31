@@ -3,7 +3,6 @@ const playerRoundScore   = document.getElementById('player-round-score');
 const playerTotalScore   = document.getElementById('player-total-score');
 const computerRoundScore = document.getElementById('computer-round-score');
 const computerTotalScore = document.getElementById('computer-total-score');
-const resultMessage      = document.getElementById('result-message');
 const rollDiceButton     = document.getElementById('roll-dice-button');
 const newGameButton      = document.getElementById('new-game-button');
 
@@ -12,6 +11,11 @@ const playerDie1Img   = document.getElementById('player-die1');
 const playerDie2Img   = document.getElementById('player-die2');
 const computerDie1Img = document.getElementById('computer-die1');
 const computerDie2Img = document.getElementById('computer-die2');
+
+// Popup DOM elements
+const resultPopup        = document.getElementById('result-popup');
+const closePopup         = document.getElementById('close-popup');
+const resultMessagePopup = document.getElementById('result-message-popup');
 
 // Initialize dice objects with default values
 const playerDie1   = new Dice('blue', 1);
@@ -43,13 +47,14 @@ function calculateScore(die1, die2) {
 function checkWinner() {
     if (round === maxRounds) {
         if (playerScore > computerScore) {
-            resultMessage.textContent = 'Player Wins!';
+            resultMessagePopup.textContent = 'Player Wins!';
         } else if (playerScore < computerScore) {
-            resultMessage.textContent = 'Computer Wins!';
+            resultMessagePopup.textContent = 'Computer Wins!';
         } else {
-            resultMessage.textContent = 'It\'s a Tie!';
+            resultMessagePopup.textContent = 'It\'s a Tie!';
         }
         rollDiceButton.disabled = true;
+        resultPopup.style.display = 'flex';
     }
 }
 
@@ -121,7 +126,7 @@ newGameButton.addEventListener('click', () => {
     computerScore = 0;
     round         = 0;
 
-    resultMessage.textContent = '';
+    resultMessagePopup.textContent = ''; // Clear result message
     rollDiceButton.disabled   = false;
 
     playerDie1.value   = minDiceValue;
@@ -130,4 +135,16 @@ newGameButton.addEventListener('click', () => {
     computerDie2.value = maxDiceValue;
 
     updateUI();
+});
+
+// Event listener for closing the modal
+closePopup.addEventListener('click', () => {
+    resultPopup.style.display = 'none';
+});
+
+// Close the modal when clicking outside of it
+window.addEventListener('click', (event) => {
+    if (event.target === resultPopup) {
+        resultPopup.style.display = 'none';
+    }
 });
